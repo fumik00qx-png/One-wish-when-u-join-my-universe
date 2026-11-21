@@ -7,373 +7,509 @@
 <title>A Little Wish for You</title>
 
 <style>
-*{box-sizing:border-box}
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Quicksand:wght@400;500;600;700&display=swap');
 
-:root{
- --pink:#ffd6e9;
- --purple:#d9c5ff;
- --navy:#111a45;
- --white:#fff9ff;
+* {
+  box-sizing: border-box;
 }
 
-body{
- margin:0;
- min-height:100vh;
- color:var(--white);
- font-family:Georgia,serif;
- text-align:center;
- background:linear-gradient(155deg,#10183d 0%,#273c79 48%,#80639e 100%);
- overflow-x:hidden;
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Quicksand', 'Itim', sans-serif;
+  color: #fff7ff;
+  background:
+    radial-gradient(circle at 20% 20%, #554b91 0%, transparent 35%),
+    radial-gradient(circle at 80% 80%, #663c82 0%, transparent 35%),
+    linear-gradient(145deg, #111b42, #25265b, #392653);
+  overflow-x: hidden;
 }
 
-.stars{
- position:fixed;
- inset:0;
- pointer-events:none;
- z-index:0;
- opacity:.8;
- background-image:
- radial-gradient(#fff 1px,transparent 1px),
- radial-gradient(#ffd8ef 1px,transparent 1px);
- background-size:57px 57px,91px 91px;
- animation:twinkle 5s ease-in-out infinite alternate;
+.page {
+  display: none;
+  min-height: 100vh;
+  width: 100%;
+  padding: 90px 22px 55px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-@keyframes twinkle{
- from{opacity:.35}
- to{opacity:.9}
+.page.active {
+  display: flex;
+  animation: appear .7s ease;
 }
 
-.cloud{
- position:fixed;
- width:190px;
- height:65px;
- background:#ffffff12;
- border-radius:60px;
- filter:blur(2px);
- pointer-events:none;
- z-index:0;
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.cloud.one{top:12%;left:-45px}
-.cloud.two{bottom:14%;right:-55px}
-
-.page{
- display:none;
- position:relative;
- z-index:1;
- min-height:100vh;
- width:100%;
- padding:35px 22px;
- align-items:center;
- justify-content:center;
- flex-direction:column;
+h1 {
+  font-size: clamp(30px, 7vw, 48px);
+  margin: 12px 0;
+  color: #ffe2f2;
+  text-shadow: 0 0 18px #f4a8e6;
 }
 
-.page.active{display:flex}
-
-.card{
- width:min(100%,540px);
- padding:30px 23px;
- border:1px solid #ffffff55;
- border-radius:28px;
- background:#ffffff19;
- backdrop-filter:blur(10px);
- box-shadow:0 15px 45px #080d2b55;
+h2 {
+  font-size: clamp(23px, 5vw, 32px);
+  color: #ffe4f5;
 }
 
-h1{
- font-size:clamp(29px,7vw,45px);
- line-height:1.25;
- margin:17px 0;
+p {
+  font-size: 17px;
+  line-height: 1.9;
 }
 
-p{
- font-size:17px;
- line-height:1.9;
+.character {
+  width: min(250px, 68vw);
+  max-height: 260px;
+  object-fit: contain;
+  margin: 15px auto;
+  filter: drop-shadow(0 8px 15px #100d2b80);
+  border-radius: 18px;
 }
 
-.small{
- font-size:12px;
- letter-spacing:4px;
- color:#ffe0f1;
+.small-character {
+  width: min(220px, 60vw);
 }
 
-.character{
- font-size:78px;
- margin:10px;
- filter:drop-shadow(0 5px 12px #ffb8e755);
+.card {
+  width: min(560px, 94vw);
+  padding: 28px 23px;
+  border: 1px solid #ffffff40;
+  border-radius: 28px;
+  background: #ffffff16;
+  box-shadow: 0 12px 40px #080b2945;
+  backdrop-filter: blur(10px);
 }
 
-button{
- border:0;
- border-radius:30px;
- padding:14px 25px;
- margin:9px;
- background:var(--pink);
- color:#563d75;
- font-size:15px;
- font-weight:bold;
- cursor:pointer;
- box-shadow:0 5px 18px #0002;
- transition:transform .2s,background .2s;
+button {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  border: 0;
+  border-radius: 50px;
+  padding: 14px 25px;
+  cursor: pointer;
+  transition: .25s ease;
+  box-shadow: 0 5px 18px #100c2b55;
 }
 
-button:hover{transform:scale(1.05)}
-button:active{transform:scale(.96)}
-
-.yes-button{
- background:linear-gradient(120deg,#ffd5e8,#f4c7ff);
+button:active {
+  transform: scale(.95);
 }
 
-#noArea{
- position:fixed;
- inset:0;
- pointer-events:none;
- z-index:10;
+.main-btn {
+  color: #49305f;
+  background: linear-gradient(135deg, #ffe0f0, #e8caff);
+  margin-top: 20px;
 }
 
-#noButton{
- position:fixed;
- left:68%;
- top:76%;
- margin:0;
- max-width:85vw;
- white-space:normal;
- pointer-events:auto;
- transition:top .45s ease,left .45s ease;
- z-index:11;
+.main-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px #f5b9ed65;
 }
 
-.question-card{
- position:relative;
- z-index:2;
+.music-box {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
 }
 
-.message{
- color:#ffe1f1;
- min-height:52px;
+.music-toggle {
+  color: #49305f;
+  background: #ffe4f3;
+  padding: 11px 17px;
+  font-size: 13px;
 }
 
-.heart{
- position:fixed;
- z-index:20;
- pointer-events:none;
- animation:floatUp 4s linear forwards;
+.music-panel {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 52px;
+  width: min(310px, 85vw);
+  padding: 13px;
+  background: #fff0fa;
+  color: #4a315d;
+  border-radius: 17px;
+  box-shadow: 0 8px 25px #0005;
 }
 
-@keyframes floatUp{
- from{transform:translateY(0) rotate(0);opacity:1}
- to{transform:translateY(-100vh) rotate(40deg);opacity:0}
+.music-panel.open {
+  display: block;
 }
 
-.sparkle{
- color:#ffe4fa;
- animation:blink 1.8s infinite alternate;
+.music-panel iframe {
+  width: 100%;
+  height: 160px;
+  border: 0;
+  border-radius: 10px;
 }
 
-@keyframes blink{
- from{opacity:.35}
- to{opacity:1}
+.music-panel p {
+  font-size: 12px;
+  margin: 5px;
 }
 
-.footer{
- font-size:12px;
- color:#ffffff9c;
- margin-top:25px;
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  color: #fff4c9;
+  opacity: .8;
+  animation: twinkle 2.5s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: .2; transform: scale(.7); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+.letter {
+  text-align: left;
+  white-space: pre-line;
+  line-height: 2;
+  font-size: 16px;
+}
+
+.question {
+  font-size: clamp(23px, 5vw, 32px);
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+  min-height: 60px;
+  width: 100%;
+}
+
+#yesBtn {
+  color: #fff;
+  background: linear-gradient(135deg, #ed83c2, #b78be8);
+  min-width: 125px;
+  z-index: 20;
+}
+
+#noBtn {
+  color: #5b426d;
+  background: #fff0fa;
+  min-width: 125px;
+  z-index: 30;
+  position: static;
+  white-space: nowrap;
+  max-width: 85vw;
+}
+
+.final-note {
+  font-size: 19px;
+  color: #ffe0f1;
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  color: #ffbce0;
+  pointer-events: none;
+  z-index: 5;
+  animation: floatUp 6s linear forwards;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh) rotate(30deg);
+    opacity: 0;
+  }
+}
+
+@media(max-width: 480px) {
+  .page { padding-left: 14px; padding-right: 14px; }
+  .card { padding: 23px 17px; }
+  button { padding: 13px 19px; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="stars"></div>
-<div class="cloud one"></div>
-<div class="cloud two"></div>
+<div class="stars" id="stars"></div>
+
+<!-- MUSIC PLAYER -->
+<div class="music-box">
+  <button class="music-toggle" onclick="toggleMusicPanel()">
+    ♫ MUSIC
+  </button>
+  <div class="music-panel" id="musicPanel">
+    <p><b>เพลงรักเพลงแรก (Blooming)</b> — LANDOKMAI</p>
+    <iframe
+      id="musicFrame"
+      src=""
+      title="เพลงรักเพลงแรก LANDOKMAI"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+    <p>กดเล่นเพลงจากหน้าต่างนี้ได้เลยนะคะ</p>
+  </div>
+</div>
 
 <!-- PAGE 1: WELCOME -->
 <section class="page active" id="welcome">
- <div class="character">🐰☁️</div>
- <div class="small">A LITTLE WISH FOR YOU</div>
- <h1>Welcome to my universe</h1>
- <p>
-  A tiny universe made just for you.<br>
-  I have something to tell you.
- </p>
- <button onclick="go('story')">
-  ENTER MY UNIVERSE
- </button>
- <div class="footer">✦ made with a little wish ♡ ✦</div>
+  <img class="character"
+    src="https://media1.tenor.com/m/UEf2e2sQn4UAAAAC/my-melody-onegai-my-melody.gif"
+    alt="My Melody">
+  <h1>A Little Wish for You</h1>
+  <p>Welcome to my universe</p>
+  <button class="main-btn" onclick="goPage('story')">
+    ENTER MY UNIVERSE
+  </button>
 </section>
 
 <!-- PAGE 2: STORY -->
 <section class="page" id="story">
- <div class="card">
-  <div class="character">🐰☂️💗</div>
-  <div class="small">A LITTLE JOURNEY</div>
-  <h1>Let's start our story</h1>
-  <p>
-   ในจักรวาลเล็ก ๆ แห่งนี้<br>
-   มีเรื่องราวหนึ่งที่เราอยากให้เธอได้อ่าน<br>
-   ค่อย ๆ อ่านไปด้วยกันนะคะ
-  </p>
-  <button onclick="go('letter')">
-   START OUR STORY
-  </button>
- </div>
+  <div class="card">
+    <img class="character small-character"
+      src="https://media1.tenor.com/m/Gzfino8TLQwAAAAd/my-melody-onegai-my-melody.gif"
+      alt="My Melody with umbrella">
+    <h1>Let's start our story</h1>
+    <p>A little place made just for you.</p>
+    <button class="main-btn" onclick="goPage('letter')">
+      START OUR STORY
+    </button>
+  </div>
 </section>
 
 <!-- PAGE 3: LETTER -->
 <section class="page" id="letter">
- <div class="card">
-  <div class="character">💌</div>
-  <div class="small">A LETTER FOR YOU</div>
-  <h1>A little letter</h1>
-  <p>
-   สวัสดีพีเค<br><br>
+  <div class="card">
+    <h1>A Letter For You</h1>
+    <p class="letter">ถึงพีเค
 
-   ขอบคุณสำหรับทุกช่วงเวลาที่เราเคยมีด้วยกันนะคะ
-   มีหลายเรื่องที่เรายังจดจำและรู้สึกดีเมื่อได้นึกถึง<br><br>
+เราไม่รู้ว่าข้อความนี้จะทำให้เธอรู้สึกยังไง
+แต่เราอยากบอกว่าเรายังรู้สึกดีกับเธอเสมอ
 
-   เรารู้ว่าที่ผ่านมาอาจมีเรื่องที่ทำให้เธอเสียใจ
-   และเราไม่อยากทำเหมือนว่าทุกอย่างจะกลับมาเป็นเหมือนเดิมได้ง่าย ๆ<br><br>
+ที่ผ่านมาเรามีทั้งเรื่องราวดี ๆ และเรื่องที่เราอยากย้อนกลับไปแก้ไข
+เราได้เรียนรู้อะไรหลายอย่างจากสิ่งที่เกิดขึ้น
+และเราก็อยากค่อย ๆ ทำให้เห็นว่าเราพยายามเปลี่ยนแปลงตัวเองจริง ๆ
 
-   แต่เรายังอยากลองสร้างเรื่องราวดี ๆ ด้วยกันอีกครั้ง
-   ถ้าเธอเองก็ต้องการเหมือนกัน<br><br>
+เราไม่ได้อยากเร่งรัดคำตอบจากเธอเลย
+แค่อยากถามคำถามหนึ่ง
+ถ้าเธอยังเปิดใจให้เราอยู่บ้าง
+เราจะมีโอกาสเริ่มต้นกันใหม่ได้ไหมนะ
 
-   ไม่ว่าเธอจะรู้สึกยังไง เราอยากให้เธอเลือกจากความรู้สึกจริง ๆ ของตัวเองนะคะ
-  </p>
-  <button onclick="go('question')">
-   ONE LITTLE QUESTION
-  </button>
- </div>
+ไม่ว่าเธอจะตอบแบบไหน
+เราก็อยากให้เธอรู้ว่าเราเคารพความรู้สึกของเธอค่ะ
+
+จากเรา ♡</p>
+    <button class="main-btn" onclick="goPage('question')">
+      ONE LITTLE QUESTION
+    </button>
+  </div>
 </section>
 
-<!-- PAGE 4: QUESTION -->
+<!-- PAGE 4: YES / NO -->
 <section class="page" id="question">
+  <div class="card">
+    <img class="character small-character"
+      src="https://media1.tenor.com/m/1nMQIJyrrtAAAAAC/my-melody-crying.gif"
+      alt="My Melody">
+    <h2 class="question">
+      Will you be my boyfriend again?
+    </h2>
+    <p>เรากลับมาเป็นแฟนกันอีกครั้งได้ไหมคะ?</p>
 
- <div class="card question-card">
-  <div class="character">🐰💗</div>
-  <div class="small">A QUESTION FROM MY HEART</div>
-
-  <h1>Will you be my boyfriend again?</h1>
-
-  <p>เรากลับมาเป็นแฟนกันอีกครั้งได้ไหมคะ?</p>
-
-  <button class="yes-button" onclick="answerYes()">
-   YES!
-  </button>
-
-  <p class="message" id="questionMessage">
-   ♡
-  </p>
- </div>
-
- <div id="noArea">
-  <button id="noButton" onclick="notReady()">
-   I'M NOT READY YET
-  </button>
- </div>
-
+    <div class="actions">
+      <button id="yesBtn" onclick="goPage('yesPage')">
+        YES!
+      </button>
+      <button id="noBtn" onclick="noClicked()">
+        NO
+      </button>
+    </div>
+    <p style="font-size:13px; opacity:.8;">
+      Take your time. It's okay to choose what feels right.
+    </p>
+  </div>
 </section>
 
 <!-- PAGE 5: YES -->
-<section class="page" id="yes">
- <div class="card">
-  <div class="character">🐰💕✨</div>
-  <div class="small">A NEW LITTLE BEGINNING</div>
-  <h1>YOU MADE MY DAY!</h1>
-  <p>
-   ขอบคุณที่เลือกเริ่มต้นเรื่องราวนี้ด้วยกันนะคะ<br>
-   เราจะตั้งใจดูแลความสัมพันธ์ของเราให้ดีค่ะ
-  </p>
-  <div class="sparkle">♡ ✦ ♡ ✧ ♡</div>
- </div>
+<section class="page" id="yesPage">
+  <div class="card">
+    <img class="character"
+      src="https://media1.tenor.com/m/HHFc6KPCiJYAAAAC/hello-kitty-island-adventure-happy-dance.gif"
+      alt="My Melody happy dance">
+    <h1>YOU MADE MY DAY!</h1>
+    <h2>Thank you for giving us another chance.</h2>
+    <p>ขอบคุณที่เลือกเริ่มต้นกันอีกครั้งนะคะ</p>
+    <p>Let's make more beautiful memories together.</p>
+  </div>
 </section>
 
-<!-- PAGE 6: TAKE YOUR TIME -->
-<section class="page" id="time">
- <div class="card">
-  <div class="character">🐰🌙</div>
-  <div class="small">A LITTLE NOTE</div>
-  <h1>It's okay.</h1>
-  <p>
-   ไม่เป็นไรเลยนะคะ<br>
-   ขอบคุณที่บอกความรู้สึกของตัวเองอย่างตรงไปตรงมา<br><br>
-   เราเคารพการตัดสินใจของเธอค่ะ
-  </p>
-  <h2>I'll be here, take your time. ♡</h2>
-  <div class="sparkle">✦ ⋆ ✧ ⋆ ✦</div>
- </div>
+<!-- PAGE 6: FINAL -->
+<section class="page" id="final">
+  <div class="card">
+    <img class="character small-character"
+      src="https://media1.tenor.com/m/1nMQIJyrrtAAAAAC/my-melody-crying.gif"
+      alt="My Melody">
+    <h1>It's okay.</h1>
+    <p class="final-note">
+      I'll be here, take your time. ♡
+    </p>
+    <p>
+      ขอบคุณที่อ่านจนจบนะคะ<br>
+      ขอให้เธอมีวันที่ดีเสมอ
+    </p>
+  </div>
 </section>
 
 <script>
-let attempts=0;
+/* STAR BACKGROUND */
+const stars = document.getElementById('stars');
 
-const messages=[
- "แน่ใจเหรอ เค้าให้คิดอีกรอบนะ",
- "คิดดี ๆ นะคะ",
- "ยังยืนยันคำตอบเดิมไหมคะ?"
+for (let i = 0; i < 55; i++) {
+  const star = document.createElement('span');
+  star.className = 'star';
+  star.textContent = '✦';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.fontSize = (8 + Math.random() * 12) + 'px';
+  star.style.animationDelay = Math.random() * 3 + 's';
+  stars.appendChild(star);
+}
+
+/* PAGE NAVIGATION */
+function goPage(pageId) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  document.getElementById(pageId).classList.add('active');
+
+  if (pageId === 'yesPage') {
+    createHearts();
+  }
+
+  if (pageId !== 'question') {
+    resetNoButton();
+  }
+
+  window.scrollTo(0, 0);
+}
+
+/* NO BUTTON */
+let noCount = 0;
+const noBtn = document.getElementById('noBtn');
+
+const noMessages = [
+  'แน่ใจเหรอ เค้าให้คิดอีกรอบนะ',
+  'คิดดี ๆ นะ',
+  'ยังยืนยันคำตอบเดิมไหมคะ?',
+  'โอเค เคารพการตัดสินใจค่ะ'
 ];
 
-const positions=[
- {top:"10%",left:"7%"},    // ซ้ายบน
- {top:"10%",left:"68%"},   // ขวาบน
- {top:"77%",left:"7%"}     // ซ้ายล่าง
-];
+function noClicked() {
+  noCount++;
 
-function go(id){
- document.querySelectorAll(".page").forEach(page=>{
-  page.classList.remove("active");
- });
+  if (noCount === 1) {
+    moveNoButton('top-left');
+  } else if (noCount === 2) {
+    moveNoButton('top-right');
+  } else if (noCount === 3) {
+    moveNoButton('bottom-left');
+  } else if (noCount >= 4) {
+    noBtn.textContent = noMessages[3];
+    noBtn.disabled = true;
 
- document.getElementById(id).classList.add("active");
- window.scrollTo(0,0);
+    setTimeout(() => {
+      goPage('final');
+    }, 1500);
+    return;
+  }
+
+  noBtn.textContent = noMessages[noCount - 1];
 }
 
-function notReady(){
- attempts++;
+function moveNoButton(position) {
+  noBtn.style.position = 'fixed';
+  noBtn.style.zIndex = '999';
+  noBtn.style.margin = '0';
 
- const btn=document.getElementById("noButton");
- const msg=document.getElementById("questionMessage");
+  noBtn.style.top = 'auto';
+  noBtn.style.right = 'auto';
+  noBtn.style.bottom = 'auto';
+  noBtn.style.left = 'auto';
 
- if(attempts>=4){
-  btn.style.display="none";
-  msg.textContent="โอเค เคารพการตัดสินใจค่ะ";
-  setTimeout(()=>{
-   go("time");
-  },1500);
-  return;
- }
+  if (position === 'top-left') {
+    noBtn.style.top = '8vh';
+    noBtn.style.left = '5vw';
+  }
 
- btn.textContent=messages[attempts-1];
+  if (position === 'top-right') {
+    noBtn.style.top = '8vh';
+    noBtn.style.right = '5vw';
+  }
 
- const pos=positions[attempts-1];
-
- btn.style.top=pos.top;
- btn.style.left=pos.left;
+  if (position === 'bottom-left') {
+    noBtn.style.bottom = '7vh';
+    noBtn.style.left = '5vw';
+  }
 }
 
-function answerYes(){
- document.getElementById("noArea").style.display="none";
- go("yes");
- hearts();
+function resetNoButton() {
+  noCount = 0;
+  noBtn.disabled = false;
+  noBtn.textContent = 'NO';
+  noBtn.style.position = 'static';
+  noBtn.style.top = '';
+  noBtn.style.right = '';
+  noBtn.style.bottom = '';
+  noBtn.style.left = '';
+  noBtn.style.margin = '';
 }
 
-function hearts(){
- for(let i=0;i<25;i++){
-  const h=document.createElement("span");
-  h.className="heart";
-  h.textContent=["♡","♥","✧","💕"][i%4];
-  h.style.left=Math.random()*100+"vw";
-  h.style.top=(50+Math.random()*45)+"vh";
-  h.style.fontSize=(18+Math.random()*20)+"px";
-  h.style.animationDuration=(2+Math.random()*3)+"s";
+/* FLOATING HEARTS */
+function createHearts() {
+  for (let i = 0; i < 22; i++) {
+    setTimeout(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = '♡';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (18 + Math.random() * 22) + 'px';
+      document.body.appendChild(heart);
 
-  document.body.appendChild(h);
+      setTimeout(() => heart.remove(), 6000);
+    }, i * 180);
+  }
+}
 
-  setTimeout(()=>h.remove(),5000);
- }
+/* MUSIC */
+function toggleMusicPanel() {
+  const panel = document.getElementById('musicPanel');
+  const frame = document.getElementById('musicFrame');
+
+  panel.classList.toggle('open');
+
+  if (panel.classList.contains('open') && !frame.src) {
+    frame.src =
+      'https://www.youtube.com/embed/N9bashij_7c?autoplay=1&loop=1&playlist=N9bashij_7c';
+  }
 }
 </script>
 
