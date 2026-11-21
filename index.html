@@ -500,17 +500,20 @@ function createHearts() {
 }
 
 /* MUSIC */
+
 function toggleMusicPanel() {
   const panel = document.getElementById('musicPanel');
   const frame = document.getElementById('musicFrame');
 
   panel.classList.toggle('open');
 
-  if (panel.classList.contains('open') && !frame.src) {
+  if (panel.classList.contains('open') &&
+      !frame.getAttribute('src')) {
     frame.src =
-      'https://www.youtube.com/embed/N9bashij_7c?autoplay=1&loop=1&playlist=N9bashij_7c';
+      'https://www.youtube.com/embed/N9bashij_7c';
   }
 }
+
 </script>
 
 </body>
