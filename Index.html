@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Wish for You</title>
+
+<style>
+*{box-sizing:border-box}
+
+:root{
+ --pink:#ffd6e9;
+ --purple:#d9c5ff;
+ --navy:#111a45;
+ --white:#fff9ff;
+}
+
+body{
+ margin:0;
+ min-height:100vh;
+ color:var(--white);
+ font-family:Georgia,serif;
+ text-align:center;
+ background:linear-gradient(155deg,#10183d 0%,#273c79 48%,#80639e 100%);
+ overflow-x:hidden;
+}
+
+.stars{
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ z-index:0;
+ opacity:.8;
+ background-image:
+ radial-gradient(#fff 1px,transparent 1px),
+ radial-gradient(#ffd8ef 1px,transparent 1px);
+ background-size:57px 57px,91px 91px;
+ animation:twinkle 5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle{
+ from{opacity:.35}
+ to{opacity:.9}
+}
+
+.cloud{
+ position:fixed;
+ width:190px;
+ height:65px;
+ background:#ffffff12;
+ border-radius:60px;
+ filter:blur(2px);
+ pointer-events:none;
+ z-index:0;
+}
+
+.cloud.one{top:12%;left:-45px}
+.cloud.two{bottom:14%;right:-55px}
+
+.page{
+ display:none;
+ position:relative;
+ z-index:1;
+ min-height:100vh;
+ width:100%;
+ padding:35px 22px;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+}
+
+.page.active{display:flex}
+
+.card{
+ width:min(100%,540px);
+ padding:30px 23px;
+ border:1px solid #ffffff55;
+ border-radius:28px;
+ background:#ffffff19;
+ backdrop-filter:blur(10px);
+ box-shadow:0 15px 45px #080d2b55;
+}
+
+h1{
+ font-size:clamp(29px,7vw,45px);
+ line-height:1.25;
+ margin:17px 0;
+}
+
+p{
+ font-size:17px;
+ line-height:1.9;
+}
+
+.small{
+ font-size:12px;
+ letter-spacing:4px;
+ color:#ffe0f1;
+}
+
+.character{
+ font-size:78px;
+ margin:10px;
+ filter:drop-shadow(0 5px 12px #ffb8e755);
+}
+
+button{
+ border:0;
+ border-radius:30px;
+ padding:14px 25px;
+ margin:9px;
+ background:var(--pink);
+ color:#563d75;
+ font-size:15px;
+ font-weight:bold;
+ cursor:pointer;
+ box-shadow:0 5px 18px #0002;
+ transition:transform .2s,background .2s;
+}
+
+button:hover{transform:scale(1.05)}
+button:active{transform:scale(.96)}
+
+.yes-button{
+ background:linear-gradient(120deg,#ffd5e8,#f4c7ff);
+}
+
+#noArea{
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ z-index:10;
+}
+
+#noButton{
+ position:fixed;
+ left:68%;
+ top:76%;
+ margin:0;
+ max-width:85vw;
+ white-space:normal;
+ pointer-events:auto;
+ transition:top .45s ease,left .45s ease;
+ z-index:11;
+}
+
+.question-card{
+ position:relative;
+ z-index:2;
+}
+
+.message{
+ color:#ffe1f1;
+ min-height:52px;
+}
+
+.heart{
+ position:fixed;
+ z-index:20;
+ pointer-events:none;
+ animation:floatUp 4s linear forwards;
+}
+
+@keyframes floatUp{
+ from{transform:translateY(0) rotate(0);opacity:1}
+ to{transform:translateY(-100vh) rotate(40deg);opacity:0}
+}
+
+.sparkle{
+ color:#ffe4fa;
+ animation:blink 1.8s infinite alternate;
+}
+
+@keyframes blink{
+ from{opacity:.35}
+ to{opacity:1}
+}
+
+.footer{
+ font-size:12px;
+ color:#ffffff9c;
+ margin-top:25px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+<div class="cloud one"></div>
+<div class="cloud two"></div>
+
+<!-- PAGE 1: WELCOME -->
+<section class="page active" id="welcome">
+ <div class="character">🐰☁️</div>
+ <div class="small">A LITTLE WISH FOR YOU</div>
+ <h1>Welcome to my universe</h1>
+ <p>
+  A tiny universe made just for you.<br>
+  I have something to tell you.
+ </p>
+ <button onclick="go('story')">
+  ENTER MY UNIVERSE
+ </button>
+ <div class="footer">✦ made with a little wish ♡ ✦</div>
+</section>
+
+<!-- PAGE 2: STORY -->
+<section class="page" id="story">
+ <div class="card">
+  <div class="character">🐰☂️💗</div>
+  <div class="small">A LITTLE JOURNEY</div>
+  <h1>Let's start our story</h1>
+  <p>
+   ในจักรวาลเล็ก ๆ แห่งนี้<br>
+   มีเรื่องราวหนึ่งที่เราอยากให้เธอได้อ่าน<br>
+   ค่อย ๆ อ่านไปด้วยกันนะคะ
+  </p>
+  <button onclick="go('letter')">
+   START OUR STORY
+  </button>
+ </div>
+</section>
+
+<!-- PAGE 3: LETTER -->
+<section class="page" id="letter">
+ <div class="card">
+  <div class="character">💌</div>
+  <div class="small">A LETTER FOR YOU</div>
+  <h1>A little letter</h1>
+  <p>
+   สวัสดีพีเค<br><br>
+
+   ขอบคุณสำหรับทุกช่วงเวลาที่เราเคยมีด้วยกันนะคะ
+   มีหลายเรื่องที่เรายังจดจำและรู้สึกดีเมื่อได้นึกถึง<br><br>
+
+   เรารู้ว่าที่ผ่านมาอาจมีเรื่องที่ทำให้เธอเสียใจ
+   และเราไม่อยากทำเหมือนว่าทุกอย่างจะกลับมาเป็นเหมือนเดิมได้ง่าย ๆ<br><br>
+
+   แต่เรายังอยากลองสร้างเรื่องราวดี ๆ ด้วยกันอีกครั้ง
+   ถ้าเธอเองก็ต้องการเหมือนกัน<br><br>
+
+   ไม่ว่าเธอจะรู้สึกยังไง เราอยากให้เธอเลือกจากความรู้สึกจริง ๆ ของตัวเองนะคะ
+  </p>
+  <button onclick="go('question')">
+   ONE LITTLE QUESTION
+  </button>
+ </div>
+</section>
+
+<!-- PAGE 4: QUESTION -->
+<section class="page" id="question">
+
+ <div class="card question-card">
+  <div class="character">🐰💗</div>
+  <div class="small">A QUESTION FROM MY HEART</div>
+
+  <h1>Will you be my boyfriend again?</h1>
+
+  <p>เรากลับมาเป็นแฟนกันอีกครั้งได้ไหมคะ?</p>
+
+  <button class="yes-button" onclick="answerYes()">
+   YES!
+  </button>
+
+  <p class="message" id="questionMessage">
+   ♡
+  </p>
+ </div>
+
+ <div id="noArea">
+  <button id="noButton" onclick="notReady()">
+   I'M NOT READY YET
+  </button>
+ </div>
+
+</section>
+
+<!-- PAGE 5: YES -->
+<section class="page" id="yes">
+ <div class="card">
+  <div class="character">🐰💕✨</div>
+  <div class="small">A NEW LITTLE BEGINNING</div>
+  <h1>YOU MADE MY DAY!</h1>
+  <p>
+   ขอบคุณที่เลือกเริ่มต้นเรื่องราวนี้ด้วยกันนะคะ<br>
+   เราจะตั้งใจดูแลความสัมพันธ์ของเราให้ดีค่ะ
+  </p>
+  <div class="sparkle">♡ ✦ ♡ ✧ ♡</div>
+ </div>
+</section>
+
+<!-- PAGE 6: TAKE YOUR TIME -->
+<section class="page" id="time">
+ <div class="card">
+  <div class="character">🐰🌙</div>
+  <div class="small">A LITTLE NOTE</div>
+  <h1>It's okay.</h1>
+  <p>
+   ไม่เป็นไรเลยนะคะ<br>
+   ขอบคุณที่บอกความรู้สึกของตัวเองอย่างตรงไปตรงมา<br><br>
+   เราเคารพการตัดสินใจของเธอค่ะ
+  </p>
+  <h2>I'll be here, take your time. ♡</h2>
+  <div class="sparkle">✦ ⋆ ✧ ⋆ ✦</div>
+ </div>
+</section>
+
+<script>
+let attempts=0;
+
+const messages=[
+ "แน่ใจเหรอ เค้าให้คิดอีกรอบนะ",
+ "คิดดี ๆ นะคะ",
+ "ยังยืนยันคำตอบเดิมไหมคะ?"
+];
+
+const positions=[
+ {top:"10%",left:"7%"},    // ซ้ายบน
+ {top:"10%",left:"68%"},   // ขวาบน
+ {top:"77%",left:"7%"}     // ซ้ายล่าง
+];
+
+function go(id){
+ document.querySelectorAll(".page").forEach(page=>{
+  page.classList.remove("active");
+ });
+
+ document.getElementById(id).classList.add("active");
+ window.scrollTo(0,0);
+}
+
+function notReady(){
+ attempts++;
+
+ const btn=document.getElementById("noButton");
+ const msg=document.getElementById("questionMessage");
+
+ if(attempts>=4){
+  btn.style.display="none";
+  msg.textContent="โอเค เคารพการตัดสินใจค่ะ";
+  setTimeout(()=>{
+   go("time");
+  },1500);
+  return;
+ }
+
+ btn.textContent=messages[attempts-1];
+
+ const pos=positions[attempts-1];
+
+ btn.style.top=pos.top;
+ btn.style.left=pos.left;
+}
+
+function answerYes(){
+ document.getElementById("noArea").style.display="none";
+ go("yes");
+ hearts();
+}
+
+function hearts(){
+ for(let i=0;i<25;i++){
+  const h=document.createElement("span");
+  h.className="heart";
+  h.textContent=["♡","♥","✧","💕"][i%4];
+  h.style.left=Math.random()*100+"vw";
+  h.style.top=(50+Math.random()*45)+"vh";
+  h.style.fontSize=(18+Math.random()*20)+"px";
+  h.style.animationDuration=(2+Math.random()*3)+"s";
+
+  document.body.appendChild(h);
+
+  setTimeout(()=>h.remove(),5000);
+ }
+}
+</script>
+
+</body>
+</html>
